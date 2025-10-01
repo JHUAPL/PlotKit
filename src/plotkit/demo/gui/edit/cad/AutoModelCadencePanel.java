@@ -11,11 +11,18 @@ import java.text.DecimalFormat;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 
+import com.google.common.collect.Range;
+
 import plotkit.cadence.*;
 import net.miginfocom.swing.MigLayout;
 
 public class AutoModelCadencePanel extends SpawnPanel implements ActionListener
 {
+	// Constants
+	private final Range<Double> RangeTickFreq = Range.closed(1.0, Double.POSITIVE_INFINITY);
+	private final Range<Double> RangeCadenceAlign = Range.closed(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+	private final Range<Double> RangeCadenceBeat = Range.closed(0.0001, Double.POSITIVE_INFINITY);
+
 	// Gui vars
 	private GNumberField tickFreqNF;
 	private GNumberField valMarkNF;
@@ -81,20 +88,20 @@ public class AutoModelCadencePanel extends SpawnPanel implements ActionListener
 
 		JLabel tickFreqL = new JLabel("Tick Freq:");
 		tickFreqL.setToolTipText("Frequency of ticks (1 tick every n-pixels)");
-		tickFreqNF = new GNumberField(this, numUnit, 1, Double.POSITIVE_INFINITY);
+		tickFreqNF = new GNumberField(this, numUnit, RangeTickFreq);
 		add("", tickFreqL);
 		add("w 40::", tickFreqNF);
 
 		JLabel valMarkL = new JLabel("Align Val:");
 		valMarkL.setToolTipText("Core model value to align to.");
-		valMarkNF = new GNumberField(this, numUnit, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+		valMarkNF = new GNumberField(this, numUnit, RangeCadenceAlign);
 		add("gapleft 20", valMarkL);
 		add("w 60::,wrap", valMarkNF);
 
 		targBeatCB = new JCheckBox("Target Beat:");
 		targBeatCB.addActionListener(this);
 		targBeatCB.setToolTipText("Target Beat (Rounded to the nearest X^2N)");
-		targBeatNF = new GNumberField(this, numUnit, 0.0001, Double.POSITIVE_INFINITY);
+		targBeatNF = new GNumberField(this, numUnit, RangeCadenceBeat);
 		add("", targBeatCB);
 		add("w 40::", targBeatNF);
 	}

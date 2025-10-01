@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
+import com.google.common.collect.Range;
+
 import plotkit.Painter;
 import plotkit.cadence.Cadence;
 import plotkit.demo.gui.edit.cad.CadenceInputPanel;
@@ -19,6 +21,9 @@ import net.miginfocom.swing.MigLayout;
 
 public class PlainTickPanel extends SpawnPanel implements ActionListener
 {
+	// Constants
+	private final Range<Double> RangeLength = Range.closed(0.0, 100.0);
+
 	// Gui vars
 	private CadenceInputPanel cadenceIP;
 	private ColorInputPanel colorIP;
@@ -76,11 +81,11 @@ public class PlainTickPanel extends SpawnPanel implements ActionListener
 		cadenceIP.addActionListener(this);
 		add("growx,span,wrap", cadenceIP);
 
-		colorIP = new ColorInputPanel(true, true);
+		colorIP = new ColorInputPanel(true, true, false);
 		colorIP.addActionListener(this);
 		add("span,wrap", colorIP);
 
-		lengthNF = new GNumberField(this, intUnit, 0, 100);
+		lengthNF = new GNumberField(this, intUnit, RangeLength);
 		add("", new JLabel("Tick Length:"));
 		add("w 40::", lengthNF);
 

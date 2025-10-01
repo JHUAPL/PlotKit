@@ -52,7 +52,7 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 		workTPC = new TextProviderChanger();
 
 		addPainterPanel = new AddPainterPanel(this, workTPC);
-		promptPanel = new PromptPanel(this);
+		promptPanel = new PromptPanel(this, "Confirm Deletion");
 //		promptPanel.setSize(MiscUtil.getDimensionScaled(aFrame.getSize(), 0.60, 0.40));
 		promptPanel.setSize(500, 235);
 		formUI();
@@ -137,10 +137,10 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 			return;
 
 		// Determine the index of the currently selected Painter
-		List<Painter> painterList = painterIP.getItems();
-		int pickIdx = painterList.size();
+		List<Painter> painterL = painterIP.getAllItems();
+		int pickIdx = painterL.size();
 		if (pickPainter != null)
-			pickIdx = painterList.indexOf(pickPainter);
+			pickIdx = painterL.indexOf(pickPainter);
 
 		// Insert the Painter into the proper position in our list of Painters
 		int insertIdx = -1;
@@ -150,11 +150,11 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 		else if (insertPos == InsertPos.AfterSelection)
 			insertIdx = pickIdx + 1;
 		else
-			insertIdx = painterList.size();
-		painterList.add(insertIdx, newPainter);
+			insertIdx = painterL.size();
+		painterL.add(insertIdx, newPainter);
 
 		// Update the table
-		painterIP.setItems(painterList);
+		painterIP.setItems(painterL);
 
 		// Update the UI and the refPlotPane
 		doUpdateRefPlotPanel();
@@ -167,10 +167,10 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 	private void doDelAction()
 	{
 		// Form the infoStr
-		List<Painter> delList = painterILP.getSelectedItems();
+		List<Painter> delL = painterILP.getSelectedItems();
 		String tabStr = "    ";
-		String infoStr = "Are you sure you want to delete the selected " + delList.size() + " painters:\n";
-		for (Painter aPainter : delList)
+		String infoStr = "Are you sure you want to delete the selected " + delL.size() + " painters:\n";
+		for (Painter aPainter : delL)
 			infoStr += tabStr + aPainter.getClass().getSimpleName() + ": " + aPainter.getDescription() + "\n";
 		infoStr += "\n";
 
@@ -182,9 +182,9 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 			return;
 
 		// Update the UI and the refPlotPane
-		List<Painter> painterList = painterIP.getItems();
-		painterList.removeAll(delList);
-		painterIP.setItems(painterList);
+		List<Painter> painterL = painterIP.getAllItems();
+		painterL.removeAll(delL);
+		painterIP.setItems(painterL);
 
 		editCP.switchToCard(null);
 		doUpdateUI();
@@ -199,9 +199,9 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 	 */
 	private void doEditAction()
 	{
-		List<Painter> painterList = painterIP.getItems();
+		List<Painter> painterL = painterIP.getAllItems();
 		Painter origPainter = painterILP.getSelectedItem();
-		int currIdx = painterList.indexOf(origPainter);
+		int currIdx = painterL.indexOf(origPainter);
 
 		// Bail if the editPanel is not properly configured
 		SpawnPanel editPanel = editCP.getActiveCard();
@@ -209,8 +209,8 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 			return;
 
 		Painter newPainter = editPanel.getPainter();
-		painterList.set(currIdx, newPainter);
-		painterIP.setItems(painterList);
+		painterL.set(currIdx, newPainter);
+		painterIP.setItems(painterL);
 		painterILP.selectItem(newPainter);
 
 		// Associate the new Painter with the original Anchor
@@ -226,16 +226,16 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 	 */
 	private void doMoveUpAction()
 	{
-		List<Painter> fullList = painterIP.getItems();
-		List<Painter> pickList = painterILP.getSelectedItems();
+		List<Painter> fullL = painterIP.getAllItems();
+		List<Painter> pickL = painterILP.getSelectedItems();
 
-		for (Painter aItem : pickList)
+		for (Painter aItem : pickL)
 		{
-			int idx = fullList.indexOf(aItem);
-			fullList.remove(idx);
-			fullList.add(idx - 1, aItem);
+			int idx = fullL.indexOf(aItem);
+			fullL.remove(idx);
+			fullL.add(idx - 1, aItem);
 		}
-		painterIP.setItems(fullList);
+		painterIP.setItems(fullL);
 
 		// Update the UI and the refPlotPane
 		doUpdateRefPlotPanel();
@@ -247,17 +247,17 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 	 */
 	private void doMoveDownAction()
 	{
-		List<Painter> fullList = painterIP.getItems();
-		List<Painter> pickList = painterILP.getSelectedItems();
+		List<Painter> fullL = painterIP.getAllItems();
+		List<Painter> pickL = painterILP.getSelectedItems();
 
-		Collections.reverse(pickList);
-		for (Painter aItem : pickList)
+		Collections.reverse(pickL);
+		for (Painter aItem : pickL)
 		{
-			int idx = fullList.indexOf(aItem);
-			fullList.remove(idx);
-			fullList.add(idx + 1, aItem);
+			int idx = fullL.indexOf(aItem);
+			fullL.remove(idx);
+			fullL.add(idx + 1, aItem);
 		}
-		painterIP.setItems(fullList);
+		painterIP.setItems(fullL);
 
 		// Update the UI and the refPlotPane
 		doUpdateRefPlotPanel();
@@ -342,19 +342,19 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 	 */
 	private void doUpdateUI()
 	{
-		List<Painter> fullList = painterIP.getItems();
-		painterL.setText("Painters: " + fullList.size());
+		List<Painter> fullL = painterIP.getAllItems();
+		painterL.setText("Painters: " + fullL.size());
 
 		// Update the action buttons
-		List<Painter> pickList = painterILP.getSelectedItems();
+		List<Painter> pickL = painterILP.getSelectedItems();
 
-		boolean isEnabled = pickList.size() > 0;
+		boolean isEnabled = pickL.size() > 0;
 		delB.setEnabled(isEnabled);
 
-		isEnabled = pickList.size() > 0 && pickList.contains(fullList.get(0)) == false;
+		isEnabled = pickL.size() > 0 && pickL.contains(fullL.get(0)) == false;
 		upB.setEnabled(isEnabled);
 
-		isEnabled = pickList.size() > 0 && pickList.contains(fullList.get(fullList.size() - 1)) == false;
+		isEnabled = pickL.size() > 0 && pickL.contains(fullL.get(fullL.size() - 1)) == false;
 		dnB.setEnabled(isEnabled);
 	}
 
@@ -366,7 +366,7 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 		// Synthesize the new demo Layout
 		PlainLayout tmpLayout = new PlainLayout();
 
-		List<Painter> painterL = painterIP.getItems();
+		List<Painter> painterL = painterIP.getAllItems();
 		for (Painter aPainter : painterL)
 		{
 			Anchor tmpAnchor = workAnchorMap.get(aPainter);
@@ -428,7 +428,7 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 
 		PainterItemHandler tmpIH = new PainterItemHandler(tmpComposer);
 		painterIP = new StaticItemProcessor<>();
-		painterILP = new ItemListPanel<>(tmpIH, painterIP, false, true);
+		painterILP = new ItemListPanel<>(tmpIH, painterIP, true);
 		painterILP.setSortingEnabled(false);
 		painterILP.addListSelectionListener(this);
 

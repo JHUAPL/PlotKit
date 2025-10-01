@@ -2,6 +2,7 @@ package plotkit.demo.misc;
 
 import plotkit.misc.LogicError;
 import glum.gui.GuiUtil;
+import glum.io.ParseUtil;
 
 public class PiUtils
 {
@@ -74,9 +75,9 @@ public class PiUtils
 	 */
 	public static double readDouble(String aStr)
 	{
-		double retVal = GuiUtil.readDouble(aStr, Double.NaN);
+		double retVal = ParseUtil.readDouble(aStr, Double.NaN);
 		if (Double.isNaN(retVal) == true && aStr.charAt(aStr.length() - 1) == PiUtils.PiChar)
-			retVal = GuiUtil.readDouble(aStr.substring(0, aStr.length() - 1), Double.NaN) * Math.PI;
+			retVal = ParseUtil.readDouble(aStr.substring(0, aStr.length() - 1), Double.NaN) * Math.PI;
 		if (Double.isNaN(retVal) == true)
 			throw new LogicError("Invalid Input: " + aStr);
 

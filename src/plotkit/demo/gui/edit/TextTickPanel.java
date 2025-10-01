@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import javax.swing.JLabel;
 
+import com.google.common.collect.Range;
+
 import glum.gui.component.*;
 import glum.gui.panel.*;
 import glum.unit.*;
@@ -19,6 +21,9 @@ import plotkit.text.*;
 
 public class TextTickPanel extends SpawnPanel implements ActionListener, TextProviderChangeListener
 {
+	// Constants
+	private final Range<Double> RangeAngle = Range.closed(-180.0, 180.0);
+
 	// Gui vars
 	private CadenceInputPanel cadenceIP;
 	private ColorInputPanel colorIP;
@@ -97,7 +102,7 @@ public class TextTickPanel extends SpawnPanel implements ActionListener, TextPro
 		cadenceIP.addActionListener(this);
 		add("growx,span,wrap", cadenceIP);
 
-		colorIP = new ColorInputPanel(true, true);
+		colorIP = new ColorInputPanel(true, true, false);
 		colorIP.addActionListener(this);
 		add("growx,span,wrap", colorIP);
 
@@ -105,7 +110,7 @@ public class TextTickPanel extends SpawnPanel implements ActionListener, TextPro
 		fontIP.addActionListener(this);
 		add("growx,span,wrap", fontIP);
 
-		angleNF = new GNumberField(this, angUnit, -180, 180);
+		angleNF = new GNumberField(this, angUnit, RangeAngle);
 		anchorBox = new GComboBox<>(this, TextAnchor.values());
 		add("", new JLabel("Angle:"));
 		add("w 40::", angleNF);

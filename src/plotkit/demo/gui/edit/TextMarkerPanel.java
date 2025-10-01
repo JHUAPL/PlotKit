@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import javax.swing.JLabel;
 
+import com.google.common.collect.Range;
+
 import glum.gui.GuiUtil;
 import glum.gui.component.*;
 import glum.gui.panel.*;
@@ -18,6 +20,10 @@ import plotkit.text.*;
 
 public class TextMarkerPanel extends SpawnPanel implements ActionListener, TextProviderChangeListener
 {
+	// Constants
+	private final Range<Double> RangeAngle = Range.closed(-180.0, 180.0);
+	private final Range<Double> RangePad = Range.closed(0.0, 100.0);
+
 	// Gui vars
 	private ColorInputPanel bgCIP;
 	private ColorInputPanel fgCIP;
@@ -98,7 +104,7 @@ public class TextMarkerPanel extends SpawnPanel implements ActionListener, TextP
 		// BG-Color area
 		add("growx,span,wrap", new JLabel("BG Color:"));
 
-		bgCIP = new ColorInputPanel(true, true);
+		bgCIP = new ColorInputPanel(true, true, false);
 		bgCIP.addActionListener(this);
 		add("growx,span,wrap", bgCIP);
 
@@ -107,7 +113,7 @@ public class TextMarkerPanel extends SpawnPanel implements ActionListener, TextP
 		// FG-Color area
 		add("growx,span,wrap", new JLabel("FG Color:"));
 
-		fgCIP = new ColorInputPanel(true, true);
+		fgCIP = new ColorInputPanel(true, true, false);
 		fgCIP.addActionListener(this);
 		add("growx,span,wrap", fgCIP);
 
@@ -115,14 +121,14 @@ public class TextMarkerPanel extends SpawnPanel implements ActionListener, TextP
 		fontIP.addActionListener(this);
 		add("growx,span,wrap", fontIP);
 
-		angleNF = new GNumberField(this, angUnit, -180, 180);
+		angleNF = new GNumberField(this, angUnit, RangeAngle);
 		anchorBox = new GComboBox<>(this, TextAnchor.values());
 		add("", new JLabel("Angle:"));
 		add("w 40::", angleNF);
 		add("", new JLabel("Anchor:"));
 		add("wrap", anchorBox);
 
-		padSizeNF = new GNumberField(this, intUnit, 0, 100);
+		padSizeNF = new GNumberField(this, intUnit, RangePad);
 		add("", new JLabel("Pad Size:"));
 		add("w 40::", padSizeNF);
 	}

@@ -53,7 +53,7 @@ public class PlumbLinePanel extends SpawnPanel implements ActionListener
 	{
 		setLayout(new MigLayout("", "", ""));
 
-		colorCIP = new ColorInputPanel(true, true);
+		colorCIP = new ColorInputPanel(true, true, false);
 		colorCIP.addActionListener(this);
 		add("", colorCIP);
 	}

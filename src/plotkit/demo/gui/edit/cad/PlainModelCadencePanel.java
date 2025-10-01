@@ -10,11 +10,17 @@ import java.text.DecimalFormat;
 
 import javax.swing.JLabel;
 
+import com.google.common.collect.Range;
+
 import plotkit.cadence.*;
 import net.miginfocom.swing.MigLayout;
 
 public class PlainModelCadencePanel extends SpawnPanel implements ActionListener
 {
+	// Constants
+	private final Range<Double> RangeCadenceBeat = Range.closed(0.00001, Double.POSITIVE_INFINITY);
+	private final Range<Double> RangeCadenceAlign = Range.closed(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+
 	// Gui vars
 	private GNumberField cadenceNF;
 	private GNumberField valMarkNF;
@@ -66,13 +72,13 @@ public class PlainModelCadencePanel extends SpawnPanel implements ActionListener
 		Unit numUnit = new NumberUnit("", "", 1.0, new DecimalFormat("0.####"));
 
 		JLabel cadenceL = new JLabel("Cadence:");
-		cadenceNF = new GNumberField(this, numUnit, 0.00001, Double.POSITIVE_INFINITY);
+		cadenceNF = new GNumberField(this, numUnit, RangeCadenceBeat);
 		add("", cadenceL);
 		add("w 40::", cadenceNF);
 
 		JLabel valMarkL = new JLabel("Align Val:");
 		valMarkL.setToolTipText("Core model value to align to.");
-		valMarkNF = new GNumberField(this, numUnit, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+		valMarkNF = new GNumberField(this, numUnit, RangeCadenceAlign);
 		add("gapleft 20", valMarkL);
 		add("w 60::", valMarkNF);
 	}

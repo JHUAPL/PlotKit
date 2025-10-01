@@ -6,7 +6,9 @@ import plotkit.AxisTransform;
 import plotkit.misc.LogicError;
 
 /**
- * Cadence where the ticks occur at regular fixed beat over the model space.
+ * Implementation of {@link Cadence} where the ticks occur at regular fixed beat over the model space.
+ * 
+ * @author lopeznr1
  */
 public class PlainModelCadence implements Cadence
 {
@@ -65,6 +67,36 @@ public class PlainModelCadence implements Cadence
 	public String toString()
 	{
 		return "[PMC: " + beat + ", " + valMark + "]";
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(beat);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(valMark);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PlainModelCadence other = (PlainModelCadence) obj;
+		if (Double.doubleToLongBits(beat) != Double.doubleToLongBits(other.beat))
+			return false;
+		if (Double.doubleToLongBits(valMark) != Double.doubleToLongBits(other.valMark))
+			return false;
+		return true;
 	}
 
 }

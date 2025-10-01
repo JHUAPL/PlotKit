@@ -1,35 +1,21 @@
 package plotkit.demo.gui;
 
 import glum.gui.panel.itemList.BasicItemHandler;
-import glum.gui.panel.itemList.query.QueryAttribute;
 import glum.gui.panel.itemList.query.QueryComposer;
-
-import java.util.Collection;
-
 import plotkit.Painter;
 import plotkit.misc.LogicError;
 
-public class PainterItemHandler extends BasicItemHandler<Painter>
+public class PainterItemHandler extends BasicItemHandler<Painter, LookUp>
 {
-	public PainterItemHandler(QueryComposer<?> aComposer)
+	public PainterItemHandler(QueryComposer<LookUp> aComposer)
 	{
-		super(aComposer.getItems());
-	}
-
-	public PainterItemHandler(Collection<QueryAttribute> aQueryAttrList)
-	{
-		super(aQueryAttrList);
+		super(aComposer);
 	}
 
 	@Override
-	public Object getColumnValue(Painter aItem, int colNum)
+	public Object getColumnValue(Painter aItem, LookUp aLookUp)
 	{
-		// Insanity check
-		if (colNum < 0 && colNum >= fullAttributeList.size())
-			return null;
-
-		LookUp lookUp = (LookUp) fullAttributeList.get(colNum).refKey;
-		switch (lookUp)
+		switch (aLookUp)
 		{
 			case Description:
 				return aItem.getDescription();
@@ -43,7 +29,7 @@ public class PainterItemHandler extends BasicItemHandler<Painter>
 	}
 
 	@Override
-	public void setColumnValue(Painter aItem, int colNum, Object aValue)
+	public void setColumnValue(Painter aItem, LookUp aLookUp, Object aValue)
 	{
 		throw new LogicError("Unsupported operation");
 	}

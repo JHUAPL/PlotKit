@@ -7,11 +7,17 @@ import java.awt.event.*;
 
 import javax.swing.JLabel;
 
+import com.google.common.collect.Range;
+
 import plotkit.cadence.*;
 import net.miginfocom.swing.MigLayout;
 
 public class PlainAxisCadencePanel extends SpawnPanel implements ActionListener
 {
+	// Constants
+	private final Range<Double> RangeCadenceBeat = Range.closed(1.0, 900.0);
+	private final Range<Double> RangeCadenceAlign = Range.closed(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+
 	// Gui vars
 	private GNumberField cadenceNF;
 	private GNumberField valMarkNF;
@@ -63,13 +69,13 @@ public class PlainAxisCadencePanel extends SpawnPanel implements ActionListener
 		Unit intUnit = new NumberUnit("", "", 1.0, 0);
 
 		JLabel cadenceL = new JLabel("Cadence:");
-		cadenceNF = new GNumberField(this, intUnit, 1, 900);
+		cadenceNF = new GNumberField(this, intUnit, RangeCadenceBeat);
 		add("", cadenceL);
 		add("w 40::", cadenceNF);
 
 		JLabel valMarkL = new JLabel("Align Val:");
 		valMarkL.setToolTipText("Core axis position to align to.");
-		valMarkNF = new GNumberField(this, intUnit, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+		valMarkNF = new GNumberField(this, intUnit, RangeCadenceAlign);
 		add("gapleft 20", valMarkL);
 		add("w 60::", valMarkNF);
 	}
