@@ -1,10 +1,25 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.painter;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Objects;
 
-import plotkit.*;
+import plotkit.AxisTransform;
+import plotkit.Painter;
 import plotkit.cadence.Cadence;
 import plotkit.geom.Dimension;
 import plotkit.misc.LogicError;
@@ -22,15 +37,15 @@ public class TimeLinePainter implements Painter
 
 	/**
 	 * @param aTextProvider
-	 *        The TextProvider used to transform from model vars to the corresponding text.
+	 *    The TextProvider used to transform from model vars to the corresponding text.
 	 * @param aCadence
-	 *        The spacing that defines where each interval is placed.
+	 *    The spacing that defines where each interval is placed.
 	 * @param aFont
-	 *        The font associated with the text to be rendered.
+	 *    The font associated with the text to be rendered.
 	 * @param aColor
-	 *        The foreground color.
+	 *    The foreground color.
 	 * @param aPadBetweenText
-	 *        The space (in pixels) to maintain between the text and the number line.
+	 *    The space (in pixels) to maintain between the text and the number line.
 	 */
 	public TimeLinePainter(TextProvider aTextProvider, Cadence aCadence, Font aFont, Color aColor, int aPadBetweenText)
 	{
@@ -174,15 +189,15 @@ public class TimeLinePainter implements Painter
 	 * If the interval is too small then the text will not be rendered
 	 *
 	 * @param g2d
-	 *        The graphics context used for rendering.
+	 *    The graphics context used for rendering.
 	 * @param aText
-	 *        The text to be rendered.
+	 *    The text to be rendered.
 	 * @param aBegX
-	 *        The beginning of the interval (units in axis space)
+	 *    The beginning of the interval (units in axis space)
 	 * @param aEndX
-	 *        The end of the interval (units in axis space)
+	 *    The end of the interval (units in axis space)
 	 * @param aMidY
-	 *        The center position (units in axis space) of where the text should be placed
+	 *    The center position (units in axis space) of where the text should be placed
 	 */
 	private void renderIntervalX(Graphics2D g2d, String aText, double aBegX, double aEndX, double aMidY)
 	{

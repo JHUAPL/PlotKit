@@ -1,3 +1,16 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.cadence;
 
 import java.util.Iterator;
@@ -10,6 +23,8 @@ import plotkit.misc.LogicError;
  * Cadence where the ticks occur at a fixed beat over the model space.
  * <P>
  * The actual beat will be a multiple of the (dynamic) beat calculated from the specified BeatCalculator.
+ *
+ * @author lopeznr1
  */
 public class DynamicModelCadence implements Cadence
 {
@@ -21,12 +36,12 @@ public class DynamicModelCadence implements Cadence
 	/**
 	 *
 	 * @param aBeatCalc
-	 *        The BeatCalculator for which ticks will occur at a multiple of.
+	 *    The BeatCalculator for which ticks will occur at a multiple of.
 	 * @param aMultiFact
-	 *        The multiplier for the number of ticks to place. For example if this value is 4 then there will be 4
-	 *        additional ticks for each tick defined in the DynamicBeatCalculator.
+	 *    The multiplier for the number of ticks to place. For example if this value is 4 then there will be 4 additional
+	 *    ticks for each tick defined in the DynamicBeatCalculator.
 	 * @param aValMark
-	 *        The value (in model space) which will be used to align the other ticks.
+	 *    The value (in model space) which will be used to align the other ticks.
 	 */
 	public DynamicModelCadence(BeatCalculator aBeatCalc, double aMultiFact, double aValMark)
 	{

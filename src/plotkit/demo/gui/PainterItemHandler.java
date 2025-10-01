@@ -1,19 +1,31 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.demo.gui;
 
-import glum.gui.panel.itemList.BasicItemHandler;
-import glum.gui.panel.itemList.query.QueryComposer;
+import glum.gui.panel.itemList.ItemHandler;
 import plotkit.Painter;
 import plotkit.misc.LogicError;
 
-public class PainterItemHandler extends BasicItemHandler<Painter, LookUp>
+/**
+ * {@link ItemHandler} for handaling {@link Painter}s.
+ * 
+ * @author lopeznr1
+ */
+public class PainterItemHandler implements ItemHandler<Painter, LookUp>
 {
-	public PainterItemHandler(QueryComposer<LookUp> aComposer)
-	{
-		super(aComposer);
-	}
-
 	@Override
-	public Object getColumnValue(Painter aItem, LookUp aLookUp)
+	public Object getValue(Painter aItem, LookUp aLookUp)
 	{
 		switch (aLookUp)
 		{
@@ -29,7 +41,7 @@ public class PainterItemHandler extends BasicItemHandler<Painter, LookUp>
 	}
 
 	@Override
-	public void setColumnValue(Painter aItem, LookUp aLookUp, Object aValue)
+	public void setValue(Painter aItem, LookUp aLookUp, Object aValue)
 	{
 		throw new LogicError("Unsupported operation");
 	}

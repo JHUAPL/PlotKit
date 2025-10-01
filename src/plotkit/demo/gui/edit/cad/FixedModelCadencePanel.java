@@ -1,3 +1,16 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.demo.gui.edit.cad;
 
 import java.awt.Color;
@@ -11,12 +24,13 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.PlainDocument;
 
-import plotkit.cadence.*;
-import plotkit.demo.misc.PiUtils;
-import net.miginfocom.swing.MigLayout;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.math.DoubleMath;
+
+import net.miginfocom.swing.MigLayout;
+import plotkit.cadence.Cadence;
+import plotkit.cadence.FixedModelCadence;
+import plotkit.demo.misc.PiUtils;
 
 public class FixedModelCadencePanel extends SpawnPanel implements ActionListener
 {
@@ -94,7 +108,8 @@ public class FixedModelCadencePanel extends SpawnPanel implements ActionListener
 			valueList = getValues();
 			if (valueList.size() == 0)
 				errStr = "Please enter at least one value.";
-		} catch (Exception aExp)
+		}
+		catch (Exception aExp)
 		{
 			errStr = aExp.getMessage();
 		}

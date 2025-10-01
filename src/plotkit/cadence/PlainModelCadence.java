@@ -1,3 +1,16 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.cadence;
 
 import java.util.Iterator;
@@ -7,7 +20,7 @@ import plotkit.misc.LogicError;
 
 /**
  * Implementation of {@link Cadence} where the ticks occur at regular fixed beat over the model space.
- * 
+ *
  * @author lopeznr1
  */
 public class PlainModelCadence implements Cadence
@@ -20,9 +33,9 @@ public class PlainModelCadence implements Cadence
 	 * @see PlainModelCadence
 	 *
 	 * @param aBeat
-	 *        The spacing between ticks (in model space).
+	 *    The spacing between ticks (in model space).
 	 * @param aValMark
-	 *        The value (in model space) which will be used to align the other ticks.
+	 *    The value (in model space) which will be used to align the other ticks.
 	 */
 	public PlainModelCadence(double aBeat, double aValMark)
 	{

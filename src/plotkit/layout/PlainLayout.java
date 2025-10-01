@@ -1,3 +1,16 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.layout;
 
 import java.awt.Graphics2D;
@@ -5,13 +18,18 @@ import java.util.*;
 
 import com.google.common.collect.ImmutableList;
 
-import plotkit.*;
-import plotkit.anchor.*;
-import plotkit.geom.*;
+import plotkit.AxisTransform;
+import plotkit.Painter;
+import plotkit.anchor.Anchor;
+import plotkit.anchor.AnchorFixed;
+import plotkit.geom.Dimension;
+import plotkit.geom.Rect;
 import plotkit.misc.LogicError;
 
 /**
  * Standard Layout used to handle positioning and rendering of Painters.
+ *
+ * @author lopeznr1
  */
 public class PlainLayout implements Layout
 {
@@ -155,13 +173,13 @@ public class PlainLayout implements Layout
 	 * Helper method used to render horizontal region outside of the plot (North / South).
 	 *
 	 * @param g2d
-	 *        The relevant graphics context.
+	 *    The relevant graphics context.
 	 * @param aRect
-	 *        Rectangle used to define the region of interest.
+	 *    Rectangle used to define the region of interest.
 	 * @param aAxisTransform
-	 *        AxisTransform used to convert between model space and axis space units.
+	 *    AxisTransform used to convert between model space and axis space units.
 	 * @param isNorthSide
-	 *        Defines whether we are rendering the North side or South side of the plot.
+	 *    Defines whether we are rendering the North side or South side of the plot.
 	 */
 	private void renderAxisX(Graphics2D g2d, Rect aRect, AxisTransform aAxisTransform, boolean isNorthSide)
 	{
@@ -208,13 +226,13 @@ public class PlainLayout implements Layout
 	 * Helper method used to render vertical region outside of the plot (West / East).
 	 *
 	 * @param g2d
-	 *        The relevant graphics context.
+	 *    The relevant graphics context.
 	 * @param aRect
-	 *        Rectangle used to define the region of interest.
+	 *    Rectangle used to define the region of interest.
 	 * @param aAxisTransform
-	 *        AxisTransform used to convert between model space and axis space units.
+	 *    AxisTransform used to convert between model space and axis space units.
 	 * @param isWestSide
-	 *        Defines whether we are rendering the West side or East side of the plot.
+	 *    Defines whether we are rendering the West side or East side of the plot.
 	 */
 	private void renderAxisY(Graphics2D g2d, Rect aRect, AxisTransform aAxisTransform, boolean isWestSide)
 	{

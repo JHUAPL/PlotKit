@@ -1,3 +1,16 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.time;
 
 import java.time.Duration;
@@ -5,15 +18,17 @@ import java.time.temporal.*;
 import java.util.Arrays;
 import java.util.List;
 
-import plotkit.misc.LogicError;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Ordering;
+
+import plotkit.misc.LogicError;
 
 /**
  * TemporalAdjuster that will adjust the appropriate TemporalField so that it matches one of the values in the
  * matchList. Adjustments will be made such that the next item in the matchList will be selected. If there is no value
  * that is greater in the matchList then the first item will be selected. Hence the list will "loop" back.
+ *
+ * @author lopeznr1
  */
 public class MatchForwardAdjuster implements TemporalAdjuster
 {
@@ -23,10 +38,10 @@ public class MatchForwardAdjuster implements TemporalAdjuster
 
 	/**
 	 * @param aModTF
-	 *        The TemporalField that will be adjusted.
+	 *    The TemporalField that will be adjusted.
 	 * @param aMatchList
-	 *        An ordered list of possible values to match against. After surpassing the very last value the TemporalField
-	 *        will be set to the first value.
+	 *    An ordered list of possible values to match against. After surpassing the very last value the TemporalField
+	 *    will be set to the first value.
 	 */
 	public MatchForwardAdjuster(TemporalField aModTF, List<Integer> aMatchList)
 	{
@@ -43,10 +58,10 @@ public class MatchForwardAdjuster implements TemporalAdjuster
 
 	/**
 	 * @param aModTF
-	 *        The TemporalField that will be adjusted.
+	 *    The TemporalField that will be adjusted.
 	 * @param aMatchArr
-	 *        An ordered array of possible values to match against. After surpassing the very last value the
-	 *        TemporalField will be set to the first value.
+	 *    An ordered array of possible values to match against. After surpassing the very last value the TemporalField
+	 *    will be set to the first value.
 	 */
 	public MatchForwardAdjuster(TemporalField aModTF, Integer... aMatchArr)
 	{

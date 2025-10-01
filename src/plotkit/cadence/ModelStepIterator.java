@@ -1,3 +1,16 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.cadence;
 
 import java.util.Iterator;
@@ -6,6 +19,8 @@ import plotkit.misc.LogicError;
 
 /**
  * Iterator that returns values (in the model space) which step over the (model space) range by a constant delta value.
+ *
+ * @author lopeznr1
  */
 public class ModelStepIterator implements Iterator<Double>
 {
@@ -24,14 +39,14 @@ public class ModelStepIterator implements Iterator<Double>
 	 * multiple of the specified beat and the specified alignment value.
 	 *
 	 * @param aBeat
-	 *        The spacing between ticks (model space).
+	 *    The spacing between ticks (model space).
 	 * @param aValBeg
-	 *        The smallest value (in model space) that appears in the view.
+	 *    The smallest value (in model space) that appears in the view.
 	 * @param aValEnd
-	 *        The largest value (in model space) that appears in the view. Values will be returned until this value has
-	 *        been reached (or surpassed).
+	 *    The largest value (in model space) that appears in the view. Values will be returned until this value has been
+	 *    reached (or surpassed).
 	 * @param aValMark
-	 *        The value (in model space) which will be used to align the other ticks.
+	 *    The value (in model space) which will be used to align the other ticks.
 	 */
 	public ModelStepIterator(double aBeat, double aValBeg, double aValEnd, double aValMark)
 	{

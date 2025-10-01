@@ -1,3 +1,16 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.tranform;
 
 import plotkit.AxisTransform;
@@ -6,6 +19,8 @@ import plotkit.AxisTransform;
  * AxisTransform that defines an open ended linear conversion of plot space to axis space.
  * <P>
  * The conversion is: plotVal = minVal + ((axisVal + scollAmt) * scaleFact)
+ *
+ * @author lopeznr1
  */
 public class PlainAxisTransform implements AxisTransform
 {
@@ -17,13 +32,13 @@ public class PlainAxisTransform implements AxisTransform
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param aMinVal
-	 *        The corresponding plot value at the axis origin.
+	 *    The corresponding plot value at the axis origin.
 	 * @param aScaleFact
-	 *        The scaler value used to convert between axis space and plot space.
+	 *    The scaler value used to convert between axis space and plot space.
 	 * @param aScrollAmt
-	 *        The amount the axis has been scrolled. This transformation is applied after the scale factor.
+	 *    The amount the axis has been scrolled. This transformation is applied after the scale factor.
 	 */
 	public PlainAxisTransform(double aMinVal, double aMaxVal, double aScaleFact, double aScrollAmt)
 	{

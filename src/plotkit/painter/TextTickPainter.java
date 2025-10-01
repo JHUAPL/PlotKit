@@ -1,10 +1,25 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.painter;
 
 import java.awt.*;
 import java.awt.font.TextLayout;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Objects;
 
-import plotkit.*;
+import plotkit.AxisTransform;
+import plotkit.Painter;
 import plotkit.cadence.Cadence;
 import plotkit.geom.Dimension;
 import plotkit.geom.Rect;
@@ -12,6 +27,8 @@ import plotkit.text.TextProvider;
 
 /**
  * Immutable class that defines a {@link Painter} used to render the text associated with a group of plot ticks.
+ *
+ * @author lopeznr1
  */
 public class TextTickPainter implements Painter
 {
@@ -29,22 +46,22 @@ public class TextTickPainter implements Painter
 
 	/**
 	 * @param aTextProvider
-	 *        The TextProvider used to transform from model vars to the corresponding text.
+	 *    The TextProvider used to transform from model vars to the corresponding text.
 	 * @param aCadence
-	 *        The spacing between each tick.
+	 *    The spacing between each tick.
 	 * @param aColor
-	 *        The color associated with the text to be rendered.
+	 *    The color associated with the text to be rendered.
 	 * @param aFont
-	 *        The font associated with the text to be rendered.
+	 *    The font associated with the text to be rendered.
 	 * @param aAnchor
-	 *        The location where the rendered text will be anchored.
+	 *    The location where the rendered text will be anchored.
 	 * @param aAngle
-	 *        The angle (in degrees) for which the text should be rotated.
+	 *    The angle (in degrees) for which the text should be rotated.
 	 * @param aOverDrawF
-	 *        Flag that causes this TextTickPainter to draw past the standard axis range. This is useful in cases where
-	 *        it would be ideal to render the text ticks past the standard range so that text will not pop in and out as
-	 *        it enters the axis boundaries but rather will be clipped by the view. The graphics context should be
-	 *        clipped if this is set to true.
+	 *    Flag that causes this TextTickPainter to draw past the standard axis range. This is useful in cases where it
+	 *    would be ideal to render the text ticks past the standard range so that text will not pop in and out as it
+	 *    enters the axis boundaries but rather will be clipped by the view. The graphics context should be clipped if
+	 *    this is set to true.
 	 */
 	public TextTickPainter(TextProvider aTextProvider, Cadence aCadence, Color aColor, Font aFont, TextAnchor aAnchor,
 			double aAngle, boolean aOverDrawF)

@@ -1,3 +1,16 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.painter;
 
 import java.awt.*;
@@ -11,6 +24,8 @@ import plotkit.geom.Dimension;
  * Immutable class that defines a {@link Painter} used to render a multi line title.
  * <P>
  * The title will be split up by '\n' characters and will be drawn on seperate lines.
+ *
+ * @author lopeznr1
  */
 public class MultiTitlePainter implements Painter
 {
@@ -23,16 +38,16 @@ public class MultiTitlePainter implements Painter
 
 	/**
 	 * @param aTitle
-	 *        The text used for the title.
+	 *    The text used for the title.
 	 * @param aColor
-	 *        The color associated with the text to be rendered.
+	 *    The color associated with the text to be rendered.
 	 * @param aFont
-	 *        The font associated with the text to be rendered.
+	 *    The font associated with the text to be rendered.
 	 * @param aAncher
-	 *        Determines where the text will be anchored.
+	 *    Determines where the text will be anchored.
 	 * @param aOffsetLength
-	 *        The offset length (pixels) before the tick should be rendered. TextTickPainters are typically associated
-	 *        with a PlainTickPainter - the length of that Tick should be used here.
+	 *    The offset length (pixels) before the tick should be rendered. TextTickPainters are typically associated with a
+	 *    PlainTickPainter - the length of that Tick should be used here.
 	 */
 	public MultiTitlePainter(String aTitle, Color aColor, Font aFont, TextAnchor aAnchor, int aOffsetLength)
 	{

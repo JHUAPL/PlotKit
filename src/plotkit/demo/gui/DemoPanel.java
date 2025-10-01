@@ -1,28 +1,47 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.demo.gui;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import glum.gui.GuiUtil;
 import glum.gui.component.GComboBox;
 import glum.gui.icon.IconUtil;
 import glum.gui.panel.CardPanel;
 import glum.gui.panel.generic.PromptPanel;
-import glum.gui.panel.itemList.*;
+import glum.gui.panel.itemList.ItemListPanel;
+import glum.gui.panel.itemList.StaticItemProcessor;
 import glum.gui.panel.itemList.query.QueryComposer;
 import net.miginfocom.swing.MigLayout;
 import plotkit.Painter;
-import plotkit.anchor.*;
+import plotkit.anchor.Anchor;
+import plotkit.anchor.AnchorFixed;
 import plotkit.demo.data.text.*;
-import plotkit.demo.gui.add.*;
+import plotkit.demo.gui.add.AddPainterPanel;
+import plotkit.demo.gui.add.InsertPos;
 import plotkit.demo.gui.edit.*;
 import plotkit.demo.misc.PlainClassNameRenderer;
-import plotkit.layout.*;
+import plotkit.layout.PlainLayout;
 import plotkit.painter.*;
-import plotkit.text.*;
+import plotkit.text.InvalidTextProvider;
+import plotkit.text.TextProvider;
 
 public class DemoPanel extends JPanel implements ActionListener, ListSelectionListener
 {
@@ -37,7 +56,7 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 	private AddPainterPanel addPainterPanel;
 	private PromptPanel promptPanel;
 	private StaticItemProcessor<Painter> painterIP;
-	private ItemListPanel<Painter> painterILP;
+	private ItemListPanel<Painter, LookUp> painterILP;
 	private CardPanel<SpawnPanel> editCP;
 	private JLabel painterL;
 	private JButton addB, delB, upB, dnB;
@@ -287,7 +306,7 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 	 * Helper method that will update the various UI components to reflect the chosen TextProvider.
 	 *
 	 * @param aTextProvider
-	 *        The TextProvider to be installed. Must not be null.
+	 *    The TextProvider to be installed. Must not be null.
 	 */
 	public void doUpdateTextProvider()
 	{
@@ -426,9 +445,9 @@ public class DemoPanel extends JPanel implements ActionListener, ListSelectionLi
 		tmpComposer.get(0).minSize = (int) (tmpComposer.get(0).defaultSize * 3.5);
 		tmpComposer.get(1).minSize = (int) (tmpComposer.get(1).defaultSize * 3.5);
 
-		PainterItemHandler tmpIH = new PainterItemHandler(tmpComposer);
+		PainterItemHandler tmpIH = new PainterItemHandler();
 		painterIP = new StaticItemProcessor<>();
-		painterILP = new ItemListPanel<>(tmpIH, painterIP, true);
+		painterILP = new ItemListPanel<>(tmpIH, painterIP, tmpComposer, true);
 		painterILP.setSortingEnabled(false);
 		painterILP.addListSelectionListener(this);
 

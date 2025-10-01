@@ -1,3 +1,16 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.time;
 
 import java.time.temporal.Temporal;
@@ -13,6 +26,8 @@ import com.google.common.collect.ImmutableList;
  * <P>
  * This class really should be part of the java library. There are a number of API methods that take a TemporalAdjuster
  * as an argument - and being able to pass a combined TemporalAdjuster would be a useful feature.
+ *
+ * @author lopeznr1
  */
 public class MultiTemporalAdjuster implements TemporalAdjuster
 {

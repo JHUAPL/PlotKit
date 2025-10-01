@@ -1,9 +1,23 @@
+// Copyright (C) 2024 The Johns Hopkins University Applied Physics Laboratory LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 package plotkit.layout;
 
 import java.awt.Graphics2D;
 import java.util.List;
 
-import plotkit.*;
+import plotkit.AxisTransform;
+import plotkit.Painter;
 import plotkit.anchor.Anchor;
 import plotkit.geom.Rect;
 
@@ -12,6 +26,8 @@ import plotkit.geom.Rect;
  * <P>
  * Implementers of this interface will be responsible for the actual positioning of the Painters and for calling each
  * Painter's render*() method with the proper arguments.
+ *
+ * @author lopeznr1
  */
 public interface Layout
 {
@@ -36,7 +52,7 @@ public interface Layout
 	 * Returns the number of pixels that should be reserved to render the X-Axis
 	 *
 	 * @param g2d
-	 *        The relevant graphics context.
+	 *    The relevant graphics context.
 	 */
 	public double getHeightForAxisX(Graphics2D g2d);
 
@@ -44,7 +60,7 @@ public interface Layout
 	 * Returns the number of pixels that should be reserved to render the Y-Axis
 	 *
 	 * @param g2d
-	 *        The relevant graphics context.
+	 *    The relevant graphics context.
 	 */
 	public double getWidthForAxisY(Graphics2D g2d);
 
@@ -52,11 +68,11 @@ public interface Layout
 	 * Renders the installed Painters to the North side of the plot.
 	 *
 	 * @param g2d
-	 *        The relevant graphics context.
+	 *    The relevant graphics context.
 	 * @param aRect
-	 *        Rectangle used to define the northern region.
+	 *    Rectangle used to define the northern region.
 	 * @param aAxisTransform
-	 *        AxisTransform used to convert between model space and axis space units.
+	 *    AxisTransform used to convert between model space and axis space units.
 	 */
 	public void renderSideNorth(Graphics2D g2d, Rect aRect, AxisTransform aAxisTransform);
 
@@ -64,11 +80,11 @@ public interface Layout
 	 * Renders the installed Painters to the South side of the plot.
 	 *
 	 * @param g2d
-	 *        The relevant graphics context.
+	 *    The relevant graphics context.
 	 * @param aRect
-	 *        Rectangle used to define the southern region.
+	 *    Rectangle used to define the southern region.
 	 * @param aAxisTransform
-	 *        AxisTransform used to convert between model space and axis space units.
+	 *    AxisTransform used to convert between model space and axis space units.
 	 */
 	public void renderSideSouth(Graphics2D g2d, Rect aRect, AxisTransform aAxisTransform);
 
@@ -76,11 +92,11 @@ public interface Layout
 	 * Renders the installed Painters to the West side of the plot.
 	 *
 	 * @param g2d
-	 *        The relevant graphics context.
+	 *    The relevant graphics context.
 	 * @param aRect
-	 *        Rectangle used to define the western region.
+	 *    Rectangle used to define the western region.
 	 * @param aAxisTransform
-	 *        AxisTransform used to convert between model space and axis space units.
+	 *    AxisTransform used to convert between model space and axis space units.
 	 */
 	public void renderSideWest(Graphics2D g2d, Rect aRect, AxisTransform aAxisTransform);
 
@@ -88,11 +104,11 @@ public interface Layout
 	 * Renders the installed Painters to the East side of the plot.
 	 *
 	 * @param g2d
-	 *        The relevant graphics context.
+	 *    The relevant graphics context.
 	 * @param aRect
-	 *        Rectangle used to define the eastern region.
+	 *    Rectangle used to define the eastern region.
 	 * @param aAxisTransform
-	 *        AxisTransform used to convert between model space and axis space units.
+	 *    AxisTransform used to convert between model space and axis space units.
 	 */
 	public void renderSideEast(Graphics2D g2d, Rect aRect, AxisTransform aAxisTransform);
 
